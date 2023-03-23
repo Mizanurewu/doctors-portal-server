@@ -20,10 +20,11 @@ async function run() {
     // const appointmentOptionsCollection=client.db('doctorsPortal').collection('appointmentOptions');
     const appointmentOptionsCollection = client.db('doctorsPortal').collection('appointmentOptions');
     const bookingsCollection = client.db('doctorsPortal').collection('bookings');
+    const usersCollection = client.db('doctorsPortal').collection('users');
 
     app.get('/appointmentOptions', async (req, res) => { // get all appointments data
       const date = req.query.date;
-      console.log(date);
+      // console.log(date);
       const query = {};
       const options = await appointmentOptionsCollection.find(query).toArray();
       const bookingQuery = { appointmentDate: date };//specific date er sob booking gula nici
@@ -36,6 +37,13 @@ async function run() {
       })
 
       res.send(options);
+    })
+
+    app.get('/bookings',async(req,res)=>{//show bookings data in appointment page
+      const email=req.query.email;
+      const query={email:email};
+      const bookings=await bookingsCollection.find(query).toArray();
+      res.send(bookings);
     })
 
     app.post('/bookings', async (req, res) => { //save appointment data to database from modal
@@ -52,6 +60,14 @@ async function run() {
       }
       const result = await bookingsCollection.insertOne(booking);
       res.send(result);
+    })
+
+    app.post('/users',async(req,res)=>{
+      const user=req.body;
+      console.log(user)
+      const result=await usersCollection.insertOne(user);
+      res.send(result);
+
     })
 
   }
