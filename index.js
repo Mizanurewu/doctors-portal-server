@@ -74,7 +74,7 @@ async function run() {
       res.send(result);
     })
 
-    app.get('/bookings',verifyJWT,async(req,res)=>{//show bookings data in dashboard page (MyAppoinement 7 )
+    app.get('/bookings',verifyJWT,async(req,res)=>{//show bookings data in dashboard page ( MyAppoinement 7 )
       const email=req.query.email;
       const decodedEmail=req.decoded.email;//const token=jwt.sign({email},process.env.ACCESS_TOKEN,{expiresIn:'1h'});
       if(email !== decodedEmail){
@@ -85,7 +85,7 @@ async function run() {
       res.send(bookings);
     })
 
-    app.get('/bookings/:id', async(req,res)=>{
+    app.get('/bookings/:id', async(req,res)=>{//
       const id=req.params.id;
       const query={_id: new ObjectId(id)};
       const booking=await bookingsCollection.findOne(query);
