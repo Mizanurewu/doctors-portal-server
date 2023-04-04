@@ -162,7 +162,7 @@ async function run() {
 
 
 
-    app.post('/users',async(req,res)=>{//save user email and name to the database
+    app.post('/users',async(req,res)=>{//save user email and name to the databasee
       const user=req.body;
       const result=await usersCollection.insertOne(user);
       res.send(result);
