@@ -76,7 +76,7 @@ async function run() {
 
     app.get('/bookings',verifyJWT,async(req,res)=>{//show bookings data in dashboard page ( MyAppoinement 7 )
       const email=req.query.email;
-      const decodedEmail=req.decoded.email;//const token=jwt.sign({email},process.env.ACCESS_TOKEN,{expiresIn:'1h'});
+      const decodedEmail=req.decoded.email;//const token=jwt.sign({email}, process.env.ACCESS_TOKEN,{expiresIn:'1h'});
       if(email !== decodedEmail){
         return res.status(403).send({message:'forbidden access'})
       }
